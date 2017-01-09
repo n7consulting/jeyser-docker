@@ -68,6 +68,10 @@ sudo chmod -R g+w ./app ./var
 
 You can access Jeyser with ```127.0.0.1``` in your browser.
 
+To access a CLI as root user : ```make root_cli```.
+
+To access a CLI as www-data user : ```make www-data_cli```.
+
 ### Tests
 
 You can test your project with Behat. To do so, just type ```make test```

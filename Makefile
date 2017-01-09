@@ -20,3 +20,9 @@ status:
 
 test:
 		docker-compose run behat
+
+root_cli:
+		 docker exec -ti --user root jeyser_site /bin/bash
+
+www-data_cli:
+		 docker exec -ti --user www-data jeyser_site /bin/bash
