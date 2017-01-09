@@ -1,0 +1,60 @@
+site:
+  build: jeyser_site
+  container_name: jeyser_site
+  ports:
+   - "80:80"
+  volumes:
+   - ./volumes/apps:/var/www/html/
+  links:
+   - mysql
+
+phpmyadmin:
+    image: nazarpc/phpmyadmin
+    container_name: jeyser_phpmyadmin
+    ports:
+        - "8080:80"
+    links:
+        - mysql:mysql
+
+mysql:
+  image: mysql:5.5
+  container_name: jeyser_mysql
+  ports:
+   - "3306:3306"  
+  environment:
+     - MYSQL_ROOT_PASSWORD=password
+     - MYSQL_DATABASE=incipio1x
+     - MYSQL_USER=incipio
+     - MYSQL_PASSWORD=password
+  volumes:
+    - "./volumes/mysql:/var/lib/mysql"
+
+behat:
+  build: behat
+  volumes:
+    - "./volumes/behat:/var/work"
+  links:
+      - hub
+  environment:
+    website: http://localhost
+
+hub:
+  image: selenium/hub
+  ports:
+    - 4444:4444
+ 
+firefox:
+  image: selenium/node-firefox-debug
+  ports:
+    - 5900
+  links:
+    - hub
+  environment:
+    REMOTE_HOST_PARAM: "-maxSession 3 -browser browserName=firefox,maxInstances=3"
+
+chrome:
+  image: selenium/node-chrome-debug
+  ports:
+    - 5900
+  links:
+    - hub
