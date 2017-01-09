@@ -50,6 +50,8 @@ The root credentials are ```root:password``` ("password" is the password).
 
 The other available user is ```incipio:password```.
 
+You can access the database by getting its IP adress in PhpMyAdmin or through the docker virtual host ```mysql```
+
 
 ### Applications
 
